@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Vehicules{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <h2>Liste des Vehicules</h2>
+                {% for cars in vehicule %}
+                    <div class="card-body">
+                        <img src="{{ cars.getPicturePath() }}" class="card-img-top" alt="">
+                        <h3 class="card-text">{{ cars.Model.Brand.Name }} </h3>
+                        <p class="card-text">type: {{ cars.Type.Name() }}</p>
+                        <p class="card-text">Capacity: {{ cars.Capacity()}} passager</p>
+                        <p class="card-text">Price: £{{ cars.Price() }}</p>
+                        <a href="{{ path('reservation') }}" class="btn btn-primary">Réserver</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
