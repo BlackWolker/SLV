@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Reservation;
+use App\Entity\State;
 use App\Entity\User;
+use App\Repository\StateRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,13 +22,11 @@ class ReservationType extends AbstractType
             ->add('dateEnd')
             ->add('numberRentalDay')
             ->add('totalCost')
-            ->add('state')
-            ->add('customer')
             ->add('customer', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'firstname',
             ])
-            ->add('Envoyer', SubmitType::class)
+            ->add('Reserver', SubmitType::class)
         ;
     }
 

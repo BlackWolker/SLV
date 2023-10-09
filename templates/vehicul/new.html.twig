@@ -4,10 +4,10 @@
 
 {% block body %}
 
-
-    <h1>Modifier</h1>
     <div class="container">
-        {{ form(form) }}
+        {% if is_granted('ROLE_USER') %}
+            {{ form(form) }}
+        {% endif %}
     </div>
 
 

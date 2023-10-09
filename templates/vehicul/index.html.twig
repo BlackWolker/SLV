@@ -3,22 +3,32 @@
 {% block title %}Liste des Vehicules{% endblock %}
 {% block body %}
     <h2>Liste des Vehicules</h2>
-    <div class="row">
-        {% for cars in vehicul %}
+    <div class="container">
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ url('app_vehicul_new') }}" class="btn btn-success">Ajouter un vehicul</a>
+        {% endif %}
+    </div>
+   <div class="container">
+       <div class="row">
+           {% for cars in vehicul %}
                <div class="col-md-4 mb-4">
                    <div class="card">
-                           <img src="{{ cars.getPicturePath() }}" class="card-img-top" alt="">
-                           <div class="card-body">
-                               <h3 class="card-text">{{ cars.Model.Brand.Name }} </h3>
-                               <p class="card-text">type: {{ cars.Type.Name() }}</p>
-                               <p class="card-text">Capacity: {{ cars.Capacity()}} passager</p>
-                               <p class="card-text">Price: £{{ cars.Price() }}</p>
-                               <a href="{{ url('app_reservation') }}" class="btn btn-primary">Réserver</a>
-                               <a href="{{ url('app_vehicul_update', {"id": cars.id}) }}" class="btn btn-success">Update</a>
-                               <a href="{{ url('app_reservation') }}" class="btn btn-danger">Delete</a>
-                           </div>
+                       <img src="{{ cars.getPicturePath() }}" class="card-img-top" alt="">
+                       <div class="card-body">
+                           <h3 class="card-text">{{ cars.Model.Brand.Name }} </h3>
+                           <p class="card-text">type: {{ cars.Type.Name() }}</p>
+                           <p class="card-text">Capacity: {{ cars.Capacity()}} passager</p>
+                           <p class="card-text">Price: £{{ cars.Price() }}</p>
+                           <a href="{{ url('app_reservation') }}" class="btn btn-primary">Réserver</a>
+                           {% if is_granted('ROLE_USER') %}
+                               <a href="{{ url('app_vehicul_update', {"id": cars.id}) }}" class="btn btn-warning">Update</a>
+                               <a href="{{ url('app_vehicul_delete', {"id": cars.id}) }}" class="btn btn-danger">Delete</a>
+                           {% endif %}
+                       </div>
                    </div>
                </div>
-        {% endfor %}
-    </div>
+           {% endfor %}
+       </div>
+   </div>
+
 {% endblock %}

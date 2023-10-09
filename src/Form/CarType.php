@@ -27,13 +27,12 @@ class CarType extends AbstractType
                 'class' => Type::class,
                 'choice_label' => 'name',
             ])
-            ->add('model')
             ->add('model', EntityType::class, [
                 'class' => Model::class,
                 'choice_label' => 'name',
             ])
             ->add('options')
-            ->add('Envoyer', SubmitType::class)
+            ->add('update', SubmitType::class)
         ;
     }
 
